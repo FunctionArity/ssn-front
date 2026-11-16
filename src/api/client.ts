@@ -1,6 +1,7 @@
 import { storage } from "../auth/storage";
 
-const BASE_URL = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
+// The Rails app: http://localhost:3000 in development, https://serviciosacerdotalnocturno.org in production.
+const BASE_URL = (import.meta.env.VITE_API_URL as string).replace(/\/$/, "");
 
 export class ApiError extends Error {
   status: number;
@@ -20,7 +21,7 @@ export function setUnauthorizedHandler(handler: () => void) {
 type Params = Record<string, string | number | undefined | null>;
 
 export async function api<T>(path: string, options: { method?: string; body?: unknown; params?: Params } = {}): Promise<T> {
-  const url = new URL(`${BASE_URL}/api/v1${path}`, window.location.origin);
+  const url = new URL(`${BASE_URL}/api/v1${path}`);
   for (const [key, value] of Object.entries(options.params ?? {})) {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
   }
