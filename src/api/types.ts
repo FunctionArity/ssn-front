@@ -44,7 +44,8 @@ export interface GuardSetup {
 
 export interface Guard extends GuardSetup {
   due_date: string;
-  status: "open" | "closed";  
+  status: "open" | "closed";
+  priest: UserSummary;
 }
 
 export interface GuardListItem extends Guard {
