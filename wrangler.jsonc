@@ -1,0 +1,11 @@
+// Cloudflare deploy: the built app (dist/) served as static files, no Worker code.
+// Unknown paths such as /guards/12 get index.html, so React Router handles them on refresh.
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "ssn-front",
+  "compatibility_date": "2026-11-19",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}

@@ -16,7 +16,9 @@ const links = [
 
 function linkClass({ isActive }: { isActive: boolean }) {
   return `flex items-center gap-2 rounded-r-md px-3 py-2 text-sm font-medium border-l-2 ${
-    isActive ? "bg-blue-50 text-blue-700 border-blue-600" : "text-gray-600 border-transparent hover:bg-gray-50 hover:text-gray-900"
+    isActive
+      ? "bg-blue-50 text-blue-700 border-blue-600"
+      : "text-gray-600 border-transparent hover:bg-gray-50 hover:text-gray-900"
   }`;
 }
 
@@ -43,12 +45,14 @@ function HeadquarterSwitcher() {
         >
           {data.headquarters.map((headquarter) => (
             <option key={headquarter.id} value={headquarter.id}>
-              {headquarter.city} ({headquarter.country})
+              {headquarter.city}
             </option>
           ))}
         </select>
       ) : (
-        <p className="mt-0.5 text-sm font-semibold text-gray-900">{me.headquarter.city}</p>
+        <p className="mt-0.5 text-sm font-semibold text-gray-900">
+          {me.headquarter.city}
+        </p>
       )}
     </div>
   );
@@ -63,7 +67,12 @@ export function Layout() {
 
   return (
     <div className="flex min-h-screen">
-      {menuOpen && <div className="fixed inset-0 z-40 bg-black/30 md:hidden" onClick={() => setMenuOpen(false)}></div>}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/30 md:hidden"
+          onClick={() => setMenuOpen(false)}
+        ></div>
+      )}
       <aside
         className={`${menuOpen ? "fixed inset-y-0 left-0 z-50 flex w-68 rounded-r-2xl shadow-xl" : "hidden"} md:static md:flex md:w-64 md:shadow-none md:rounded-none shrink-0 flex-col bg-white border-r border-gray-200`}
       >
@@ -71,7 +80,10 @@ export function Layout() {
           <img src="/icon.svg" alt="" className="w-8 h-8" />
           <span className="text-sm font-bold text-gray-900">SSN</span>
         </div>
-        <nav className="space-y-1 py-6 flex-1 overflow-y-auto" onClick={() => setMenuOpen(false)}>
+        <nav
+          className="space-y-1 py-6 flex-1 overflow-y-auto"
+          onClick={() => setMenuOpen(false)}
+        >
           <HeadquarterSwitcher />
           {links.map((link) => (
             <NavLink key={link.to} to={link.to} className={linkClass}>
@@ -97,8 +109,12 @@ export function Layout() {
                 {me.user.initials}
               </div>
               <div className="hidden sm:block min-w-0 leading-tight">
-                <p className="font-medium text-gray-900 truncate">{me.user.full_name}</p>
-                <p className="text-xs text-gray-400">{roleLabels[me.user.role]}</p>
+                <p className="font-medium text-gray-900 truncate">
+                  {me.user.full_name}
+                </p>
+                <p className="text-xs text-gray-400">
+                  {roleLabels[me.user.role]}
+                </p>
               </div>
               <button
                 className="cursor-pointer flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700"

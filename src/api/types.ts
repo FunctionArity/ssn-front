@@ -33,16 +33,18 @@ export interface SignInResponse extends Me {
   token: string;
 }
 
-export interface Guard {
+export interface GuardSetup {
   id: number;
   number: number;
-  day_number: number;
-  due_date: string;
-  status: "open" | "closed";
+  day_number: number;  
   notes: string | null;
-  vocal: UserSummary;
-  priest: UserSummary;
+  vocal: UserSummary;  
   guardians: UserSummary[];
+}
+
+export interface Guard extends GuardSetup {
+  due_date: string;
+  status: "open" | "closed";  
 }
 
 export interface GuardListItem extends Guard {
@@ -80,6 +82,7 @@ export interface ServiceDetail extends Service {
 
 export interface GuardsPage {
   guards: GuardListItem[];
+  today_guard_setup: GuardSetup;
   page: number;
   total_pages: number;
 }
